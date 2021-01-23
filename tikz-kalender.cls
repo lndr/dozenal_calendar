@@ -316,7 +316,7 @@
             % Print month name
             \draw (0,0)node [shape=rectangle,minimum height=\RN@dayheight,%
               text width=\RN@daywidth,fill=\RN@monthBGcolor,%
-              draw=\RN@monthBGcolor,text=\RN@monthColor,text centered]{%
+              draw=black,text=\RN@monthColor,text centered]{%
               \RN@monthFont\pgfcalendarmonthname{\pgfcalendarcurrentmonth}};
           }{}%
           \ifdate{workday}{\tikzset{every day/.style=%
