@@ -1,15 +1,14 @@
 \listfiles
 \documentclass{tikz-kalender}
 
-% a simple calender
-
 \setup{%
-,year=2016
-,title={Termine}
-,events={Schulferien-2016,Feiertage-2016,Geburtstage,Urlaub,Sonstiges}
+,year=2021
+,events={holidays2021}
+,showweeknumbers
+,lang=german
+,titleColor=beige
 }
 
 \begin{document}
-  \makeKalender
+	\makeKalender{}
 \end{document} 
-
