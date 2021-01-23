@@ -99,7 +99,7 @@
 
 \newcommand*\setup[1]{\pgfqkeys{/RN}{#1}}
 
-\PassOptionsToPackage{a4paper}{geometry}
+\PassOptionsToPackage{a3paper}{geometry}
 \PassOptionsToPackage{svgnames}{xcolor}
 
 \ifRN@XeOrLua
@@ -137,7 +137,6 @@
     \def\pgfutil@translate#1{\translate{#1}}%
     % Correct the wrong definition in `pgfutil-latex.def' 
   }%
-  \input{tikz-kalender-translation.clo}
   \usetikzlibrary{calendar}
 }
 
@@ -151,21 +150,21 @@
   \RN@calheight=\ifRN@print\paperwidth\else\paperheight\fi 
   \@tempcnta=\RN@calwidth
   \divide\@tempcnta by \@M %
-  \RN@xunit=\@tempcnta sp %                  0.0845pt (a4)
+  \RN@xunit=\@tempcnta sp %   
   \@tempcnta=\RN@calheight
   \divide\@tempcnta by \@M %
-  \RN@yunit=\@tempcnta sp %                 0.05974pt (a4)
-  \RN@daywidth=1515\RN@xunit%                    45mm (a4)
-  \RN@daysep=118\RN@xunit   %                   3.5mm (a4)
-  \RN@dayheight=192\RN@xunit%                   5.7mm (a4)
-  \RN@setFont{RN@dayFont}{134}%                   8pt (a4)     
-  \RN@setFont{RN@dayNbFont}{167}%                10pt (a4)
-  \RN@setFont{RN@eventFont}{134}%                 8pt (a4)
-  \RN@setFont[\normalfont]{RN@normalFont}{167}%  10pt (a4)
-  \RN@setFont{RN@weekNbFont}{134}%                8pt (a4)
-  \RN@setFont[\bfseries]{RN@monthFont}{167}%     10pt (a4)
-  \RN@setFont[\bfseries]{RN@titleFont}{666}%     40pt (a4)
-  \RN@setFont[\bfseries]{RN@yearFont}{1000}%     60pt (a4)
+  \RN@yunit=\@tempcnta sp %   
+  \RN@daywidth=780\RN@xunit% 
+  \RN@daysep=42\RN@xunit   % 
+  \RN@dayheight=200\RN@xunit% 
+  \RN@setFont{RN@dayFont}{120}%
+  \RN@setFont{RN@dayNbFont}{120}%
+  \RN@setFont{RN@eventFont}{80}%
+  \RN@setFont[\normalfont]{RN@normalFont}{80}%
+  \RN@setFont{RN@weekNbFont}{120}%
+  \RN@setFont[\bfseries]{RN@monthFont}{120}%
+  \RN@setFont[\bfseries]{RN@titleFont}{300}%
+  \RN@setFont[\bfseries]{RN@yearFont}{500}%
   \RN@normalFont
   \settowidth\@tempdima{\RN@formatDayNb{99}\RN@formatDay{0}}%
   \RN@eventwidthL=\dimexpr\RN@daywidth-\@tempdima
@@ -276,7 +275,7 @@
           \noexpand\csname event@#1\endcsname}};%
       }
     }%
-    \pgfcalendarifdate{#1}{at most=06-last}% first half-year?
+    \pgfcalendarifdate{#1}{at most=12-last}% 
       {\expandafter\g@addto@macro\expandafter\RN@events@I\expandafter{\@tempa}}%
       {\expandafter\g@addto@macro\expandafter\RN@events@II\expandafter{\@tempa}}%
   }{%
@@ -298,7 +297,7 @@
 \newcommand\RN@makeKalender[2]{%
   \sbox\RN@tempbox{%
     \begin{tikzpicture}[every day/.style={anchor=north}]%
-      \calendar[dates=#1 to #2,name=cal,day text={\%d=},%day yshift=3em,%  ????
+      \calendar[dates=#1 to #2,name=cal,day text={\%d=},%
         day code={%
           \node[name=\pgfcalendarsuggestedname,every day,%
           shape=rectangle,minimum height=\RN@dayheight,%
@@ -335,7 +334,7 @@
           \pgftransformyshift{-\pgfcalendarcurrentday\RN@dayheight}%
         }%
       ];%
-      \pgfcalendarifdate{#1}{at most=06-last}{\RN@events@I}{\RN@events@II}%
+      \pgfcalendarifdate{#1}{at most=12-last}{\RN@events@I}{\RN@events@II}%
     \end{tikzpicture}%
   }%
   \parbox[c][\RN@calheight]{\RN@calwidth}{%
@@ -365,18 +364,11 @@
     \def\do##1{\InputIfFileExists{##1.events}{}{}}%
     \expandafter\docsvlist\expandafter{\RN@events@files}%
   \endgroup
-  \sbox{\RN@pageI}{\RN@makeKalender{\RN@year-01-01}{\RN@year-06-30}}%
-  \sbox{\RN@pageII}{\RN@makeKalender{\RN@year-07-01}{\RN@year-12-31}}%
+  \sbox{\RN@pageI}{\RN@makeKalender{\RN@year-01-01}{\RN@year-12-31}}%
   \ifRN@print
     \rotatebox[origin=c]{90}{\usebox\RN@pageI}%
   \else
     \usebox\RN@pageI
-  \fi
-  \newpage
-  \ifRN@print
-    \rotatebox[origin=c]{-90}{\usebox\RN@pageII}%
-  \else
-    \usebox\RN@pageII
   \fi
 }
 
