@@ -43,6 +43,7 @@
 \newcommand*\RN@periodColor{period}
 
 \newcounter{weeknumber}
+\newcounter{daynumber}
 \newsavebox\RN@pageI
 \newsavebox\RN@pageII
 \newsavebox\RN@tempbox
@@ -65,7 +66,7 @@
 
 \LoadClass{article}
 
-\RequirePackage{pgfkeys,etoolbox,ragged2e}
+\RequirePackage{pgfkeys,etoolbox,ragged2e,dozenal}
 
 \pgfkeys{
   /RN/.cd,
@@ -78,7 +79,7 @@
   dayFont/.store in=\RN@dayFont,
   dayNbFont/.store in=\RN@dayNbFont,
   weekNbFont/.store in=\RN@weekNbFont,
-  eventFont/.store in=\RN@eventFont,% ???
+  eventFont/.store in=\RN@eventFont,
   title/.store in=\RN@title,
   year/.store in=\RN@year,
   yearText/.store in=\RN@yearText,
@@ -120,8 +121,6 @@
   \RequirePackage{tgheros}
 \fi
 
-\renewcommand*\familydefault{\sfdefault}
-
 \AtEndPreamble{% "etoolbox"
   \ifRN@print
     \RequirePackage{graphicx}
@@ -143,7 +142,8 @@
 }
 
 \AtBeginDocument{%
-  \definecolor{dark}{HTML}{A57C00}
+  \definecolor{beige}{HTML}{D0B084}
+  \definecolor{dark}{HTML}{85A5D1}
   \colorlet{medium}{dark!35}
   \colorlet{bright}{dark!20}
   \colorlet{period}{gray!30}
@@ -202,7 +202,7 @@
 }
 \newcommand*\RN@formatWeekNb[1]{%
   \hspace{30\RN@xunit}\RN@weekNbFont
-  \raisebox{.15ex}{[\raisebox{-.15ex}{\arabic{#1}}]}%
+  \raisebox{.15ex}{[\raisebox{-.15ex}{\dozens{\arabic{#1}}}]}%
   \hspace{20\RN@xunit}%
 }
 \newcommand*\RN@formatEvent[2]{%
@@ -303,7 +303,7 @@
           \node[name=\pgfcalendarsuggestedname,every day,%
           shape=rectangle,minimum height=\RN@dayheight,%
           text width=\RN@daywidth,draw=black
-          ]{\RN@formatDayNb{\tikzdaytext}%
+          ]{\stepcounter{daynumber}\RN@formatDayNb{\dozens{\arabic{daynumber}}}%
             \RN@formatDay{\pgfcalendarcurrentweekday}%
             \ifRN@showweeknumbers
               \ifdate{Monday}{\stepcounter{weeknumber}%
@@ -312,6 +312,7 @@
         },%
         execute before day scope={%
           \ifdate{day of month=1}{%
+            \setcounter{daynumber}{0}%
             \pgftransformxshift{\dimexpr\RN@daywidth+\RN@daysep}%
             % Print month name
             \draw (0,0)node [shape=rectangle,minimum height=\RN@dayheight,%
@@ -340,7 +341,7 @@
   \parbox[c][\RN@calheight]{\RN@calwidth}{%
     \vfill
     \centering
-    \RN@formatTitle{\wd\RN@tempbox}{\RN@yearText}{\RN@title}%
+    \RN@formatTitle{\wd\RN@tempbox}{\dozens{\RN@yearText}}{\RN@title}%
     \vfill
     \usebox\RN@tempbox
     \vfill
@@ -383,9 +384,3 @@
 \pagestyle{empty}
 
 \endinput
-%%
-%% End of file `tikz-kalender.cls'.
-
-
-
-
