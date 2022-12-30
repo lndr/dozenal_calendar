@@ -143,7 +143,7 @@
 \AtBeginDocument{%
   \definecolor{darkblue}{HTML}{2C4396}
   \definecolor{beige}{HTML}{D0B084}
-  \definecolor{dark}{HTML}{259814}
+  \definecolor{dark}{HTML}{FF7300}
   \colorlet{medium}{dark!35}
   \colorlet{bright}{dark!20}
   \colorlet{period}{gray!30}
