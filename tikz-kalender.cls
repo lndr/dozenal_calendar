@@ -143,7 +143,7 @@
 \AtBeginDocument{%
   \definecolor{darkblue}{HTML}{2C4396}
   \definecolor{beige}{HTML}{D0B084}
-  \definecolor{dark}{HTML}{FF7300}
+  \definecolor{dark}{HTML}{2C13AD}
   \colorlet{medium}{dark!35}
   \colorlet{bright}{dark!20}
   \colorlet{period}{gray!30}
@@ -163,9 +163,9 @@
   \RN@setFont{RN@eventFont}{80}%
   \RN@setFont[\normalfont]{RN@normalFont}{80}%
   \RN@setFont{RN@weekNbFont}{120}%
-  \RN@setFont[\bfseries]{RN@monthFont}{120}%
-  \RN@setFont[\bfseries]{RN@titleFont}{300}%
-  \RN@setFont[\bfseries]{RN@yearFont}{500}%
+  \RN@setFont{RN@monthFont}{120}%
+  \RN@setFont{RN@titleFont}{300}%
+  \RN@setFont{RN@yearFont}{500}%
   \RN@normalFont
   \settowidth\@tempdima{\RN@formatDayNb{99}\RN@formatDay{0}}%
   \RN@eventwidthL=\dimexpr\RN@daywidth-\@tempdima
@@ -202,7 +202,7 @@
 }
 \newcommand*\RN@formatWeekNb[1]{%
   \hspace{30\RN@xunit}\RN@weekNbFont
-  \raisebox{.15ex}{[\raisebox{-.15ex}{\dozens{\arabic{#1}}}]}%
+  \raisebox{.15ex}{[\raisebox{-.15ex}{\textrm{\dozens{\arabic{#1}}}}]}%
   \hspace{20\RN@xunit}%
 }
 \newcommand*\RN@formatEvent[2]{%
@@ -303,7 +303,7 @@
           \node[name=\pgfcalendarsuggestedname,every day,%
           shape=rectangle,minimum height=\RN@dayheight,%
           text width=\RN@daywidth,draw=black
-          ]{\stepcounter{daynumber}\RN@formatDayNb{\dozens{\arabic{daynumber}}}%
+          ]{\stepcounter{daynumber}\RN@formatDayNb{\textrm{\dozens{\arabic{daynumber}}}}%
             \RN@formatDay{\pgfcalendarcurrentweekday}%
             \ifRN@showweeknumbers
               \ifdate{Monday}{\stepcounter{weeknumber}%
