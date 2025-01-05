@@ -1,0 +1,20 @@
+% Yearly events should contain the macro \year.
+
+\event*{\year-01-01}{Neujahr}
+\event{\year-03-20}{\(\pi\)}
+\event*{2025-04-18}{Karfreitag}
+\event{2025-04-20}{Ostersonntag}
+\event*{2025-04-21}{Ostermontag}
+\event*{\year-05-01}{Tag der Arbeit}
+\event*{2025-05-29}{Christi Himmelfahrt}
+\event{2025-06-08}{Pfingstsonntag}
+\event*{2025-06-09}{Pfingstmontag}
+\event*{2025-06-19}{Fronleichnam}
+\event*{\year-10-03}{Tag der deutschen Einheit}
+\event*{\year-11-01}{Allerheiligen}
+\event*{\year-12-24}{Heiligabend}
+\event*{\year-12-25}{1. Weihnachtstag}
+\event*{\year-12-26}{2. Weihnachtstag}
+\event*{\year-12-31}{Sylvester}
+
+\endinput
